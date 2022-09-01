@@ -2,12 +2,12 @@ import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
-//        task1_2();
-//        task3();
-//        task5();
-//        task6();
+        task1_2();
+        task3();
+        task5();
+        task6();
         task7();
-//        task8();
+        task8();
     }
 
     public static void task1_2() {
@@ -102,20 +102,23 @@ public class Main {
 
     public static void task8(){
         //работает только если строка сортирована
-        String string = "aabccddefgghiijjkk";
+        String string = "the quick brown fox jumps over the lazy dog";
         char[] chars = string.toCharArray();
-//        sortedChar(chars);                                       // на случай несортированной строки
+        sortedChar(chars);                                              // на случай несортированной строки
         int matches;
         System.out.print("повторяющиется символы в строке - ");
         for (int i = 0; i < chars.length; i += matches + 1) {
             matches =0;
             for (int j = i + 1; j < chars.length; j++) {
+                if(chars[i] == 32){                                     // исключаем пробелы
+                    continue;
+                }
                 if(chars[i] == chars[j]){
                     matches++;
                 }
             }
             if(matches > 0){
-                System.out.print(chars[i] + " ");
+                System.out.printf("[%s]", chars[i]);
             }
         }
     }
