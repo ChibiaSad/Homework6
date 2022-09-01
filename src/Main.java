@@ -50,7 +50,9 @@ public class Main {
     }
 
     public static void task7(){
-        String str1 = "9362", str2 = "47518";
+        String str1 = "0The9quick3brown6fox1", str2 = "jumps4over8the5lazy2dog7";
+
+        // первая ситуация - 2 несортированных строки слить в 1 сортированную
         char[] char1 = str1.toCharArray(), char2 = str2.toCharArray();
         sortedChar(char1);
         sortedChar(char2);
@@ -58,28 +60,35 @@ public class Main {
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < str1.length() + str2.length(); i++) {
             if(j == str1.length()){
-                stringBuilder.append(char2[k]);
+                stringBuilder.append(char2[k++]);
                 continue;
             }
             if(k == str2.length()){
-                stringBuilder.append(char1[j]);
+                stringBuilder.append(char1[j++]);
                 continue;
             }
             if(char1[j] > char2[k]){
-                stringBuilder.append(char2[k]);
-                k++;
+                stringBuilder.append(char2[k++]);
             } else {
-                stringBuilder.append(char1[j]);
-                j++;
+                stringBuilder.append(char1[j++]);
             }
         }
         System.out.println("Результат - " + stringBuilder);
+
+           //вторая ситуация - отсортировать суммарную строку
+//        char[] result = (str1 + str2).toCharArray();
+//        sortedChar(result);
+//        StringBuilder stringBuilder1 = new StringBuilder();
+//        for (char c : result) {
+//            stringBuilder1.append(c);
+//        }
+//        System.out.println("Результат - " + stringBuilder1);
     }
 
     private static void sortedChar(char[] charArr) {
         for (int i = 0; i < charArr.length; i++) {
             char min = charArr[i];
-            for (int j = i; j < charArr.length; j++) {
+            for (int j = i + 1; j < charArr.length; j++) {
                 if(min > charArr[j]){
                     min = charArr[j];
                     charArr[j] = charArr[i];
@@ -91,19 +100,23 @@ public class Main {
 
     public static void task8(){
         //работает только если строка сортирована
-        String string = "aabccddefgghiijjkk";
+        String string = "the quick brown fox jumps over the lazy dog";
         char[] chars = string.toCharArray();
+        sortedChar(chars);                                              // на случай несортированной строки
         int matches;
         System.out.print("повторяющиется символы в строке - ");
         for (int i = 0; i < chars.length; i += matches + 1) {
             matches =0;
             for (int j = i + 1; j < chars.length; j++) {
+                if(chars[i] == 32){                                     // исключаем пробелы
+                    continue;
+                }
                 if(chars[i] == chars[j]){
                     matches++;
                 }
             }
             if(matches > 0){
-                System.out.print(chars[i] + " ");
+                System.out.printf("[%s]", chars[i]);
             }
         }
     }
